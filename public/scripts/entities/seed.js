@@ -1,17 +1,18 @@
 class Seed extends Denizen {
-
   constructor(options) {
     super(options);
-    this.waterFriction = 0.3;      // "0.3" means "lose 30% per second"
-    this.imageUri = '/images/seed.png';
+    this.waterFriction = 0.5; // "0.3" means "lose 30% per second"
+    this.imageUri = "/images/seed.png";
     this.type = options.type;
     this.height = options.height || 30;
     this.width = options.width || 30;
-    this.ttl = options.ttl || randRangeInt(3, 6);
+    this.ttl = options.ttl || randRangeInt(1, 3);
   }
 
   updateOneTick() {
-    this.velocity = this.velocity.scale( 1 - this.waterFriction * PHYSICS_TICK_SIZE_S );
+    this.velocity = this.velocity.scale(
+      1 - this.waterFriction * PHYSICS_TICK_SIZE_S
+    );
     this.velocity.y -= 50 * PHYSICS_TICK_SIZE_S;
 
     var delta = this.velocity.scale(PHYSICS_TICK_SIZE_S);
@@ -36,5 +37,4 @@ class Seed extends Denizen {
     this.spawn();
     this.kill();
   }
-
 }

@@ -1,16 +1,16 @@
 class Starter extends Denizen {
-
   constructor(options) {
     super(options);
-    this.imageUri = '/images/volcano.jpg';
+    this.imageUri = "/images/volcano.jpg";
     this.position.y += this.height;
+    Array.from(Array(5)).forEach(() => this.spawnSeeds());
   }
 
   update(t) {
     // no physics for Starter
   }
 
-  onClick(event) {
+  spawnSeeds() {
     var xVel = randRangeInt(-300, 300);
     var yVel = 400 - Math.abs(xVel);
     var s = new Seed({
@@ -19,5 +19,9 @@ class Starter extends Denizen {
       velocity: new Vector(xVel, yVel),
       type: this.tank.getRandomSpecies(),
     });
+  }
+
+  onClick(event) {
+    Array.from(Array(5)).forEach(() => this.spawnSeeds());
   }
 }
